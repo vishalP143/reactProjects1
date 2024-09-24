@@ -18,11 +18,11 @@ const App = () => {
 
   return (
     <div className="container">
-      <pre>
+      <p>
         <h2>Checking Password Strength in ReactJS</h2>
         <span>Enter Password: </span><input type="text" onChange={(e) => validate(e.target.value)}></input> <br />
         {errorMessage === '' ? null : <span className="error-message">{errorMessage}</span>}
-      </pre>
+      </p>
     </div>
   );
 };
