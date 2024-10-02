@@ -1,0 +1,143 @@
+/* src/styles/App.css */
+
+/* Global Box Styles */
+.box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  max-width: 480px;
+  margin: 40px auto;
+  background-color: #fafafa;
+}
+
+/* Form Styles */
+.form-container {
+  width: 100%;
+}
+
+/* Input Field Styles */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+/* Button Group Styles */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Button Styles */
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  min-width: 120px;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color palette for buttons */
+.btn-update {
+  background-color: #218838;
+}
+
+.btn-cancel {
+  background-color: #5a6268;
+}
+
+.btn-home {
+  background-color: #138496;
+}
+
+.btn-add {
+  background-color: #e0a800;
+}
+
+.btn-delete {
+  background-color: #c82333;
+}
+
+/* Add these to your global CSS file */
+
+@media (max-width: 768px) {
+  .box-container {
+      margin: 20px auto;
+  }
+
+  .button-group {
+      flex-direction: column;
+      gap: 5px;
+  }
+
+  .btn {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 14px 28px;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.4s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-15px);
+  }
+
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.notification+.notification {
+  margin-top: 18px;
+}
+
+.notification-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.notification-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.notification-warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.notification-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.notification button {
+  float: right;
+  margin-left: 8px;
+}
