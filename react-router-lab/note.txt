@@ -1,3 +1,25 @@
+React Router DOM is a library that allows developers to handle routing in React web applications: 
+Routing: The process of matching a browser's URL to the corresponding page or component that should be rendered 
+Dynamic routing: A primary functionality of React Router DOM that allows developers to create complex routing configurations 
+Component-based routing: Ideal for routing when a React application is running on a browser 
+React Router DOM includes everything in React Router, plus a few DOM-specific APIs. It provides a flexible and declarative way to define routes using components. 
+With React Router DOM, developers can: Create dynamic and multi-page applications, Render different components based on URL paths, Create seamless user experiences without full-page refreshes, and Manage application navigation. 
+Some components that React Router provides include: 
+BrowserRouter: A component for managing application navigation 
+Route: A component for defining routes 
+Link: A component for creating links 
+Dynamic segments: Segments of the URL that can be dynamic placeholders 
+
+Axios is a JavaScript library that allows developers to make HTTP requests to a server from a web browser or Node.js: 
+Purpose
+Axios simplifies the process of sending asynchronous HTTP requests to a server and handling the response. 
+Features
+Axios offers various ways to make requests, such as GET, POST, PUT/PATCH, and DELETE. It also has built-in features and is compatible with both browser and Node.js environments. 
+Isomorphic
+Axios is isomorphic, meaning it can run in the browser and Node.js with the same codebase. 
+Ease of use
+Axios is easy to use and can help developers avoid writing hundreds of lines of code to accomplish the same thing. 
+
 /*Here's an explanation of the `DeletePerson` component:
 
 ### 1. **Component Structure:**
@@ -271,3 +293,4 @@ The `PersonEdit` component effectively handles the editing of a person's details
 
 ### Summary:
 The `PersonList` component effectively manages the display of a list of people in the application. It fetches data from an API, displays it in a table format, and provides navigation to details and addition of new persons. The component adheres to React's principles of modularity and maintainability, making it an integral part of the rental management system. The `Notification` component is included to provide user feedback, though the mechanism for updating its state may need further implementation to enhance the user experience.*/
+
