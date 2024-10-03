@@ -1,0 +1,39 @@
+Here's an explanation of your **`App`** component:
+
+### Overview:
+This React component checks whether the entered password is "strong" based on specific criteria. It uses the **`validator`** library to perform the password validation.
+
+### Key Features:
+1. **Password Validation**:
+   - The password is validated using the **`validator.isStrongPassword()`** function from the `validator` library.
+   - A strong password is defined by these criteria:
+     - Minimum length of 8 characters.
+     - At least 1 lowercase letter.
+     - At least 1 uppercase letter.
+     - At least 1 number.
+     - At least 1 symbol.
+
+2. **State Management**:
+   - `errorMessage`: This state variable stores a message indicating whether the password is strong or not.
+
+3. **Validation Function (`validate`)**:
+   - This function is called whenever the user types in the password input field.
+   - It uses the `validator.isStrongPassword` function to check the strength of the entered password.
+   - If the password meets the criteria, it updates `errorMessage` to "Is Strong Password."
+   - Otherwise, it updates `errorMessage` to "Is Not Strong Password."
+
+4. **Displaying the Validation Message**:
+   - If `errorMessage` is not an empty string, the component displays the message ("Is Strong Password" or "Is Not Strong Password") below the input field.
+
+### JSX Breakdown:
+- **Input Field**: This is where the user types the password. The `onChange` event triggers the `validate` function each time the user types something.
+- **Validation Message**: The message is displayed conditionally, based on the value of `errorMessage`. If no message is set (i.e., `errorMessage === ''`), nothing is displayed.
+
+### Example Flow:
+1. The user types a password into the input field.
+2. As they type, the `validate` function checks whether the password meets the strong password criteria.
+3. If the password is strong, the message "Is Strong Password" appears.
+4. If the password is weak, the message "Is Not Strong Password" appears.
+
+### Summary:
+This component provides real-time feedback on password strength. It checks the entered password against predefined rules (length, upper/lowercase letters, numbers, symbols) using the `validator` library, and displays a message to inform the user whether the password is strong or not.

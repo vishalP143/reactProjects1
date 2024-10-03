@@ -1,0 +1,273 @@
+/*Here's an explanation of the `DeletePerson` component:
+
+### 1. **Component Structure:**
+   - The `DeletePerson` component is a functional component in React that accepts two props:
+     - `id`: The ID of the person to be deleted.
+     - `onDelete`: A function passed as a prop that will handle the actual deletion of the person when invoked.
+
+### 2. **handleDelete Function:**
+   - The `handleDelete` function is called when the delete button is clicked.
+   - Inside this function, the following steps occur:
+     - It uses `window.confirm` to show a confirmation dialog to the user. The message `"Are you sure you want to delete this person?"` is displayed.
+     - If the user clicks "OK" (which means they confirmed the action), the `onDelete` function is called, passing the `id` as an argument. This function is responsible for deleting the person with the given ID.
+
+### 3. **Button Element:**
+   - The `button` element renders a clickable button with the label "Delete."
+   - The `onClick` event handler is attached to the button, which triggers the `handleDelete` function when clicked.
+   - The button is styled with a CSS class `"btn btn-delete"`, which is expected to apply the delete button styles defined in your CSS.
+
+### 4. **Usage of `onDelete`:**
+   - The actual logic of deleting the person (like making an API call to delete from a server) is not handled within this component. Instead, the `onDelete` function passed from the parent component is responsible for that.
+   - This makes the component reusable, allowing it to handle deletions based on the specific logic defined by the parent.
+
+### Example Scenario:
+   - If you have a list of people, each rendered with a `DeletePerson` component, clicking the "Delete" button will prompt the user with a confirmation message.
+   - Upon confirmation, the parent component will handle the deletion logic, such as removing the person from the list or making a network request to delete the person from a database. 
+
+This component is simple and focuses on user confirmation and delegating the deletion logic to the parent component.*/
+
+/*Here's an explanation of the `NotFound` component:
+
+### 1. **Component Structure:**
+   - The `NotFound` component is a functional component in React that serves to inform users when they navigate to a route that does not exist. It is typically displayed when a user tries to access an invalid URL within the application.
+
+### 2. **Return Statement:**
+   - The component returns a JSX structure that will be rendered to the screen. Here's a breakdown of the returned elements:
+     - **`<div className="not-found">`:** A container div that wraps the content of the component, styled with a CSS class named `"not-found"` to apply specific styles (not shown in this snippet).
+     
+     - **`<h2>404 - Not Found</h2>`:** An `<h2>` header that displays the status code "404," which is a standard HTTP status code indicating that the requested resource could not be found. This informs the user of the error.
+     
+     - **`<p>The page you are looking for does not exist.</p>`:** A paragraph providing a more descriptive message that clarifies to the user that the page they are trying to access is not available.
+     
+     - **`<a href="/" className="btn">Go Back Home</a>`:** An anchor (`<a>`) tag that serves as a button. It provides a way for the user to navigate back to the home page of the application. The `href="/"` attribute directs the user to the root of the application. The `className="btn"` is used to style this anchor tag to look like a button, based on the CSS rules associated with the `"btn"` class.
+
+### 3. **Styling:**
+   - The CSS class `not-found` is intended to apply styles specific to the Not Found page. Although the specific styles are not provided in this code snippet, they could include things like text alignment, font size, and background color to improve the user experience.
+
+### 4. **Usage in the Application:**
+   - The `NotFound` component would typically be used in the routing configuration of your application to handle cases where the user navigates to an undefined route. For example, in your `App.js`, you might have a route set up to display this component for any unmatched paths:
+     ```javascript
+     <Route path="*" element={<NotFound />} />
+     ```
+
+### Summary:
+This component serves as a user-friendly way to inform users that they have landed on a non-existent page, providing a clear message and an easy way to navigate back to the main part of the application. It enhances the overall user experience by helping users recover from navigation errors.*/
+
+/*Here's an explanation of the `Notification` component:
+
+### 1. **Component Structure:**
+   - The `Notification` component is a functional component in React that is designed to display notifications to users. These notifications could be success messages, error alerts, or any informational messages that require user attention.
+
+### 2. **Props:**
+   - The component accepts two props:
+     - **`message`:** An object that contains the notification text and type. 
+       - `message.text`: A string that represents the content of the notification (what the notification will display).
+       - `message.type`: A string that defines the type of notification (such as "success," "error," "warning," or "info"). This type can be used for styling purposes.
+     - **`onClose`:** A function passed as a prop that will be called when the user wants to close the notification. This is typically used to remove the notification from the display.
+
+### 3. **Dynamic Class Assignment:**
+   - The variable `notificationClass` dynamically constructs the class name for the notification based on the `message.type`:
+     ```javascript
+     const notificationClass = `notification ${message.type}`;
+     ```
+   - This allows the component to apply different styles based on the notification type. For example, you might have different background colors or text colors for different types of notifications.
+
+### 4. **Return Statement:**
+   - The component returns a JSX structure that consists of:
+     - **`<div className={notificationClass}>`:** A div that serves as the container for the notification. Its class name is set dynamically based on the `notificationClass` variable.
+     - **`{message.text}`:** Displays the text content of the notification, allowing the user to read the message.
+     - **`<button onClick={onClose} className="btn btn-cancel">Close</button>`:** A button that users can click to close the notification. When the button is clicked, the `onClose` function is called, allowing the parent component to handle the closing logic (like removing the notification from the UI). The button is styled with the classes `"btn"` and `"btn-cancel"`.
+
+### 5. **Usage in the Application:**
+   - The `Notification` component can be used anywhere in your application where you need to alert the user to certain events or actions. For example, after successfully adding or deleting a person, you might show a notification confirming the action.
+   - It allows for a clean separation of the notification logic and display from the rest of the application logic, making it reusable and easier to manage.
+
+### Summary:
+The `Notification` component is a flexible and reusable piece of UI that allows you to display contextual messages to users. By accepting props for the message content and type, it can be styled and functionally customized to suit various needs in your application, enhancing user experience by providing timely feedback on actions.*/
+
+/*Here’s a detailed explanation of the `PersonAdd` component:
+
+### 1. **Component Purpose:**
+   - The `PersonAdd` component is designed to allow users to add a new person by providing their name and age. It handles form submission, sends the data to an API, and displays notifications based on the success or failure of the operation.
+
+### 2. **Imports:**
+   - **React and Hooks:** The component imports React and the `useState` hook to manage local state.
+   - **Axios:** Used for making HTTP requests to the API.
+   - **useNavigate:** A hook from `react-router-dom` used to programmatically navigate users to different routes within the application.
+   - **Notification:** The component imports a custom `Notification` component to display messages to the user.
+
+### 3. **Environment Variables:**
+   - `const API_URL = process.env.REACT_APP_API_URL;`: This line retrieves the base API URL from environment variables. It allows you to manage API endpoints without hardcoding them, making it easier to switch between development and production environments.
+
+### 4. **State Management:**
+   - **`name` and `age`:** These state variables hold the input values for the person's name and age.
+   - **`showNotification`:** This state variable manages the visibility and content of notifications. It can hold either `null` (indicating no notification) or an object with `type` and `text` properties to represent the notification type and message.
+   - **`navigate`:** The `useNavigate` hook is called to get the function to programmatically navigate to different routes.
+
+### 5. **Form Submission:**
+   - **`handleSubmit`:** This asynchronous function handles the form submission:
+     - It prevents the default form submission behavior with `e.preventDefault()`.
+     - It checks if both `name` and `age` are provided; if not, it exits early.
+     - An Axios POST request is made to the `API_URL` with the `name` and `age` as the request body.
+     - If the request is successful:
+       - It retrieves the new person's ID from the response.
+       - Clears the input fields by setting `name` and `age` back to empty strings.
+       - Displays a success notification using `setShowNotification`.
+       - Navigates to the new person's detail page after a 2-second delay using `setTimeout`.
+     - If there’s an error during the API call:
+       - It logs the error to the console and sets an error notification message.
+
+### 6. **Notification Handling:**
+   - **`handleCloseNotification`:** This function resets the `showNotification` state to `null`, which effectively hides the notification when the close button is clicked.
+
+### 7. **Render Method:**
+   - The component returns a JSX structure that includes:
+     - **Container Div:** Wrapped in a div with a class of `box-container`, which styles the layout.
+     - **Title:** An `<h2>` header that indicates the purpose of the page (Add Person).
+     - **Form:** A form element with:
+       - An input field for the person's name, bound to the `name` state variable.
+       - An input field for the person's age, bound to the `age` state variable.
+       - A submit button for adding the person, styled with the class `btn btn-add`.
+       - A cancel button that, when clicked, navigates back to the home page.
+     - **Notification Component:** Conditionally renders the `Notification` component if `showNotification` is not `null`, passing the notification message and the close handler.
+
+### Summary:
+The `PersonAdd` component provides a user-friendly interface for adding new people to the application. It effectively manages user input, handles API communication, and provides feedback through notifications, enhancing the overall user experience. The component adheres to React's principles of state management and functional programming, making it modular and reusable.*/
+
+/*Here’s a detailed explanation of the `PersonDetail` component:
+
+### 1. **Component Purpose:**
+   - The `PersonDetail` component displays detailed information about a specific person based on their ID. It fetches the person's data from an API, allows for deletion of the person, and provides a way to navigate back to the home page or edit the person’s details.
+
+### 2. **Imports:**
+   - **React and Hooks:** The component imports React and hooks like `useEffect` and `useState` for managing lifecycle and state.
+   - **React Router Hooks:** `useParams` for accessing route parameters (specifically the person's ID), `Link` for navigation, and `useNavigate` for programmatic navigation.
+   - **Axios:** Used for making HTTP requests to interact with the API.
+   - **Notification:** The custom `Notification` component for showing success or error messages.
+   - **Component-specific Styles:** The component imports its own CSS file for styling.
+
+### 3. **Environment Variable:**
+   - `const API_URL = process.env.REACT_APP_API_URL;`: This retrieves the base API URL from environment variables, allowing easy configuration for different environments (development, production, etc.).
+
+### 4. **State Management:**
+   - **`person`:** This state variable holds the details of the person fetched from the API. It starts as `null` until data is retrieved.
+   - **`showNotification`:** This state variable manages the visibility and content of notifications (success or error messages).
+   - **`navigate`:** The `useNavigate` hook provides a function to programmatically change the route.
+
+### 5. **Effect Hook:**
+   - **`useEffect`:** This hook runs after the component mounts (and when `id` changes) to fetch the person's details:
+     - **`fetchPerson`:** An asynchronous function that fetches data using Axios. If successful, it updates the `person` state with the response data. If an error occurs, it logs the error and sets an error notification.
+
+### 6. **Delete Functionality:**
+   - **`deletePerson`:** This asynchronous function handles the deletion of the person:
+     - It sends a DELETE request to the API with the person's ID.
+     - On successful deletion, it sets a success notification and navigates back to the home page after a delay of 3 seconds.
+     - If there’s an error, it logs the error and displays an error notification.
+
+### 7. **Notification Handling:**
+   - **`handleCloseNotification`:** This function sets the `showNotification` state to `null`, which hides the notification when the close button is clicked.
+
+### 8. **Render Method:**
+   - The component returns a JSX structure that includes:
+     - **Loading State:** If the `person` state is still `null` (data is being fetched), it displays a loading message.
+     - **Person Details:** Once the data is loaded, it displays the person's name and age.
+     - **Action Buttons:**
+       - An "Edit" link that navigates to the edit page for the current person.
+       - A "Delete" button that triggers the `deletePerson` function.
+       - A "Back to Home" link that navigates back to the home page.
+     - **Notification Component:** Conditionally renders the `Notification` component if `showNotification` is not `null`, passing the notification message and the close handler.
+
+### Summary:
+The `PersonDetail` component effectively handles displaying detailed information about a specific person and provides functionalities to edit or delete that person. It uses React hooks for state management and lifecycle methods, integrates with an API for data fetching and manipulation, and enhances user experience through notifications. The component adheres to React's principles of modularity and reusability, making it a valuable part of the application.*/
+
+/*Here’s a detailed explanation of the `PersonEdit` component:
+
+### 1. **Component Purpose:**
+   - The `PersonEdit` component allows users to edit the details (name and age) of a specific person. It fetches the person's current details from an API, allows the user to make changes, and then updates the person's details in the backend.
+
+### 2. **Imports:**
+   - **React and Hooks:** The component imports React along with `useState` and `useEffect` for managing state and side effects.
+   - **React Router Hooks:** `useParams` for accessing route parameters (the person's ID) and `useNavigate` for navigation.
+   - **Axios:** Used for making HTTP requests to interact with the API.
+   - **Component-specific Styles:** The component imports its own CSS file for styling.
+
+### 3. **Environment Variable:**
+   - `const API_URL = process.env.REACT_APP_API_URL;`: This retrieves the base API URL from environment variables, enabling flexibility in different environments.
+
+### 4. **State Management:**
+   - **`person`:** This state variable holds the details of the person being edited, initialized with an object containing empty strings for `name` and `age`.
+   - **`navigate`:** The `useNavigate` hook provides a function to programmatically change the route.
+
+### 5. **Effect Hook:**
+   - **`useEffect`:** This hook runs after the component mounts (and when `id` changes) to fetch the current details of the person:
+     - **`fetchPerson`:** An asynchronous function that sends a GET request to the API to retrieve the person's details based on the ID. If successful, it updates the `person` state with the response data. If an error occurs, it logs the error to the console.
+
+### 6. **Input Change Handling:**
+   - **`handleChange`:** This function updates the `person` state as the user types in the input fields. It uses destructuring to get the `name` and `value` from the event target, then updates the corresponding property in the `person` state object.
+
+### 7. **Update Handling:**
+   - **`handleUpdate`:** This asynchronous function is triggered when the form is submitted:
+     - It prevents the default form submission behavior.
+     - Sends a PUT request to update the person's details in the backend with the current `person` state.
+     - If successful, it navigates back to the person's detail page using the ID.
+     - If an error occurs, it logs the error to the console.
+
+### 8. **Cancel and Home Navigation:**
+   - **`handleCancel`:** This function navigates back to the person's detail page without making any changes when the cancel button is clicked.
+   - **`handleHome`:** This function navigates back to the home page when the "Back to Home" button is clicked.
+
+### 9. **Render Method:**
+   - The component returns a JSX structure that includes:
+     - A title ("Edit Person").
+     - A form for editing the person's details with:
+       - An input field for the name, bound to `person.name` and updating on change.
+       - An input field for the age, bound to `person.age` and updating on change.
+     - **Action Buttons:**
+       - A submit button for updating the person's details.
+       - A cancel button that triggers the `handleCancel` function.
+       - A "Back to Home" button that triggers the `handleHome` function.
+
+### Summary:
+The `PersonEdit` component effectively handles the editing of a person's details. It utilizes React hooks for state management and lifecycle methods, interacts with an API for data fetching and updating, and provides a user-friendly interface with navigation options. The component adheres to React's principles of modularity and reusability, making it an integral part of the application for managing person data.*/
+
+/*Here’s a detailed explanation of the `PersonList` component:
+
+### 1. **Component Purpose:**
+   - The `PersonList` component is responsible for displaying a list of people, including their names and ages. It retrieves this information from an API and allows users to navigate to individual person details or add new people.
+
+### 2. **Imports:**
+   - **React and Hooks:** The component imports React along with `useEffect` and `useState` for managing component state and side effects.
+   - **React Router:** `Link` is imported to create navigable links within the app.
+   - **Axios:** Used for making HTTP requests to the API.
+   - **Notification Component:** This component is imported for displaying messages or alerts to the user.
+   - **Component-specific Styles:** The component imports its CSS file for styling.
+
+### 3. **Environment Variable:**
+   - `const API_URL = process.env.REACT_APP_API_URL;`: This retrieves the base URL of the API from environment variables, providing flexibility in different environments.
+
+### 4. **State Management:**
+   - **`people`:** This state variable holds the list of people fetched from the API, initialized as an empty array.
+   - **`notification`:** This state variable is used to manage any notifications that need to be displayed (though it appears to be initialized but not used actively in the current implementation).
+
+### 5. **Effect Hook:**
+   - **`useEffect`:** This hook runs when the component mounts (i.e., when it is first rendered) to fetch the list of people:
+     - **`fetchPeople`:** An asynchronous function that sends a GET request to the API to retrieve the list of people. If the request is successful, the state `people` is updated with the response data. If an error occurs, it logs the error to the console.
+
+### 6. **Render Method:**
+   - The component returns a JSX structure that includes:
+     - A header ("Person List") for the list of people.
+     - A button that links to the "Add Person" page. Clicking this button will navigate the user to a form for adding a new person.
+     - A table structure for displaying the list of people:
+       - **Table Header:** Contains two columns: "Name" and "Age".
+       - **Table Body:** Uses the `map` method to iterate over the `people` array, rendering a row for each person. Each row contains:
+         - A `Link` to the person's details page, displaying the person's name.
+         - The person's age.
+     - **Notification:** This conditional renders the `Notification` component if there is a message to display, allowing the user to see alerts about various actions (though the notification state is not actively set in this code).
+
+### 7. **Links:**
+   - The `Link` component is used to create navigable links that allow users to:
+     - Click on a person's name to navigate to their details page (using the person's ID in the URL).
+     - Click the "Add Person" button to navigate to the form for adding a new person.
+
+### Summary:
+The `PersonList` component effectively manages the display of a list of people in the application. It fetches data from an API, displays it in a table format, and provides navigation to details and addition of new persons. The component adheres to React's principles of modularity and maintainability, making it an integral part of the rental management system. The `Notification` component is included to provide user feedback, though the mechanism for updating its state may need further implementation to enhance the user experience.*/

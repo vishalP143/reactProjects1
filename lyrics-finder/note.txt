@@ -1,0 +1,38 @@
+Here's a simple explanation of your **`App`** component:
+
+### Overview:
+This React component allows users to search for song lyrics by entering the **artist's name** and the **song title**. It uses **Axios** to make a request to an external API (`https://api.lyrics.ovh/v1/`) to fetch the song's lyrics.
+
+### Key Parts:
+1. **State Management**:
+   - `artist`: Stores the name of the artist entered by the user.
+   - `song`: Stores the name of the song entered by the user.
+   - `lyrics`: Stores the lyrics of the song after they are fetched from the API.
+
+2. **User Input**:
+   - There are two input fields where the user can type the artist's name and the song's title. These inputs update the `artist` and `song` state values through the `setArtist` and `setSong` functions.
+   - The inputs are controlled by React's state, meaning the values entered in the input fields are tied to the component's state.
+
+3. **Search Functionality**:
+   - When the user clicks the **Search** button, the `searchLyrics` function is triggered. 
+   - It checks if both `artist` and `song` fields are filled. If they are, it makes a **GET request** to the `lyrics.ovh` API using Axios.
+   - If the request is successful, it retrieves the lyrics and stores them in the `lyrics` state. These lyrics are then displayed on the screen.
+
+4. **Displaying the Lyrics**:
+   - After a successful search, the song lyrics are displayed in a `<p>` tag by reading the `lyrics` state.
+
+### JSX Elements:
+- **Two Input Fields**: One for the artist name and one for the song name. The values typed into these fields update the respective state (`artist` and `song`).
+- **Search Button**: Clicking this button triggers the `searchLyrics` function to fetch the lyrics.
+- **Lyrics Display**: If the lyrics are fetched successfully, they are displayed in the paragraph (`<p>`) tag below the search button.
+
+### Example Flow:
+1. User enters "Adele" as the artist and "Hello" as the song.
+2. They click "Search."
+3. The app makes a request to `https://api.lyrics.ovh/v1/Adele/Hello`.
+4. The API responds with the lyrics for "Hello" by Adele.
+5. These lyrics are then displayed on the screen below the input fields.
+
+
+### Summary:
+This component allows users to find song lyrics by making a request to the `lyrics.ovh` API based on the artist and song they input. The lyrics are displayed once fetched, with a simple and user-friendly interface.
